@@ -1,5 +1,6 @@
 import subprocess
 import os
+import stat
 import sys
 import re
 from datetime import datetime
@@ -80,6 +81,7 @@ def read_config():
     session_path = find_in_tree(SESSION_FILE)
     if session_path is None:
         print("No %s file present." % SESSION_FILE)
+        print("You can log in with `aoc -k <cookie>`")
         return False
     with open(session_path) as file:
         shared_config.cookie = file.read().splitlines()[0]
@@ -340,6 +342,31 @@ def store_key(cookie_):
     write_git_ignore()
 
 
+def install_script():
+    raw = """
+    #!/bin/sh
+
+    "%s" "%s" "$@"
+    """ % (
+        sys.executable,
+        __file__,
+    )
+
+    raw = raw.strip("\n").splitlines()
+    raw = list(map(lambda l: l.strip(" \t"), raw))
+    return "\n".join(raw + [""])
+
+
+def install():
+    exec = "/usr/local/bin/aoc"
+    try:
+        with open(exec, "w") as f:
+            f.write(install_script())
+        os.chmod(exec, os.stat(exec).st_mode | 0o555)
+    except:
+        print("Retry with sudo.")
+
+
 def main():
     if not check_requirements():
         return False
@@ -354,6 +381,8 @@ def main():
         return submit(arg[-1])
     if a_len > 1 and arg[-2] == "-k":
         return store_key(arg[-1])
+    if a_len > 0 and arg[-1] == "install":
+        return install()
 
     print("🐮")
 

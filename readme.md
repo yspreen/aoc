@@ -13,5 +13,5 @@ temporary usage:
 - [x] download puzzle
 - [x] delete tmp html
 - [x] write secret file into gitignore
-- [ ] login command
-- [ ] install command
+- [x] login command
+- [x] install command
