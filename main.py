@@ -183,7 +183,7 @@ def submit(answer):
         print("Too high.")
         log(answer, "low")
         correct = False
-    elif "wait" in text:
+    elif "left to wait" in text:
         print("Please wait %s." % get_wait_time(text))
         correct = False
     elif "not the right answer" in text:
