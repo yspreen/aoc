@@ -57,7 +57,8 @@ def find_in_tree(filename):
     return search_path + filename
 
 
-def write_git_ignore(lines):
+def write_git_ignore():
+    lines = [SESSION_FILE, LOG_FILE]
     git_path = find_in_tree(".git")
     if git_path is None:
         return
@@ -83,7 +84,7 @@ def read_config():
     with open(session_path) as file:
         shared_config.cookie = file.read().splitlines()[0]
 
-    write_git_ignore([".aoc.secret", ".answers.log"])
+    write_git_ignore()
 
     try:
         with open(CONFIG_FILE) as file:
@@ -327,6 +328,18 @@ def new_year_directory(year_string):
         print("Failed to create year directory.")
 
 
+def store_key(cookie_):
+    cookie = cookie_.lower()  # type: str
+    if cookie.startswith("cookie: "):
+        cookie = cookie[len("cookie: ") :]
+    if not cookie.startswith("session="):
+        cookie = "session=" + cookie
+    with open(SESSION_FILE, "w") as f:
+        f.write(cookie)
+    print("(Stored in %s)" % SESSION_FILE)
+    write_git_ignore()
+
+
 def main():
     if not check_requirements():
         return False
@@ -339,6 +352,8 @@ def main():
         return new_year_directory(arg[-1])
     if a_len > 1 and arg[-2] == "-s":
         return submit(arg[-1])
+    if a_len > 1 and arg[-2] == "-k":
+        return store_key(arg[-1])
 
     print("🐮")
 
