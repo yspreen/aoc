@@ -162,8 +162,8 @@ def pandoc(from_file, to_file=".tmp.md"):
         stderr=subprocess.DEVNULL,
         shell=True,
     )
-    os.remove(from_file)
     _ = p.communicate()[0].decode()
+    os.remove(from_file)
 
 
 def log_line(text):
@@ -313,8 +313,8 @@ def new_day_directory(day_string):
         config.cookie = shared_config.cookie
         write_meta_file(config)
         download_puzzle(config)
-    except:
-        print("Failed to create day directory.")
+    except Exception as e:
+        print("Failed to create day directory:", e)
     os.chdir("..")
 
 
