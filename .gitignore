@@ -1,5 +1,9 @@
 .pyenv/
 tmp/
 tmp.html
-.aoc.secret
+# .aoc.secret
 curl.txt
+
+.aoc.secret
+
+.answers.log
