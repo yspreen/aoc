@@ -133,6 +133,7 @@ def pandoc(from_file, to_file=".tmp.md"):
         stderr=subprocess.DEVNULL,
         shell=True,
     )
+    os.remove(from_file)
     _ = p.communicate()[0].decode()
 
 
