@@ -11,6 +11,7 @@ temporary usage:
 - [x] create directories for day and year
 - [x] download input
 - [x] download puzzle
+- [ ] delete tmp html
 - [ ] login command
 - [ ] install command
 - [ ] write secret file into gitignore
