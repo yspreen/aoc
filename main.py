@@ -138,7 +138,7 @@ def pandoc(from_file, to_file=".tmp.md"):
 
 def log_line(text):
     with open(LOG_FILE, "a") as f:
-        f.write("[%s] \n" % (datetime.now().isoformat(), str(text)))
+        f.write("[%s] %s\n" % (datetime.now().isoformat(), str(text)))
 
 
 def log(answer, result):
@@ -175,11 +175,11 @@ def submit(answer):
     text.split("(")[0]
 
     correct = True
-    if "too low" in text:
+    if " too low " in text:
         print("Too low.")
         log(answer, "low")
         correct = False
-    elif "too high" in text:
+    elif " too high " in text:
         print("Too high.")
         log(answer, "low")
         correct = False
@@ -201,7 +201,7 @@ def submit(answer):
 
 
 def get_wait_time(text):
-    return text.split(" left")[0].split(" ")[-1]
+    return text.split(" left")[0].split("have ")[-1]
 
 
 def parse_answer_html(html):
