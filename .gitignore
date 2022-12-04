@@ -1,0 +1,5 @@
+.pyenv/
+tmp/
+tmp.html
+.aoc.secret
+curl.txt
