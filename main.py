@@ -45,19 +45,45 @@ def o_int(text):
     return int(text)
 
 
-def read_config():
+def find_in_tree(filename):
     wd = os.getcwd()
     depth = wd.count("/")
     search_path = "./"
-    while not os.path.exists(search_path + SESSION_FILE):
+    while not os.path.exists(search_path + filename):
         depth -= 1
         if depth < 0:
-            print("No %s file present." % SESSION_FILE)
             return None
         search_path += "../"
-    session_path = search_path + SESSION_FILE
+    return search_path + filename
+
+
+def write_git_ignore(lines):
+    git_path = find_in_tree(".git")
+    if git_path is None:
+        return
+    git_ignore_path = git_path + "ignore"
+
+    for line in lines:
+        try:
+            with open(git_ignore_path, "r") as f:
+                read_lines = f.read().splitlines()
+                read_lines = list(map(lambda l: l.split(" #")[0], read_lines))
+                read_lines = list(map(lambda l: l.split("#")[0], read_lines))
+                assert line in read_lines
+        except:
+            with open(git_ignore_path, "a") as f:
+                f.write("\n%s\n" % line)
+
+
+def read_config():
+    session_path = find_in_tree(SESSION_FILE)
+    if session_path is None:
+        print("No %s file present." % SESSION_FILE)
+        return False
     with open(session_path) as file:
         shared_config.cookie = file.read().splitlines()[0]
+
+    write_git_ignore([".aoc.secret", ".answers.log"])
 
     try:
         with open(CONFIG_FILE) as file:
@@ -192,6 +218,7 @@ def submit(answer):
         log(answer, "wrong")
         correct = False
     else:
+        print("Correct!")
         log(answer, "correct")
 
     if not correct or shared_config.part is None:
