@@ -37,6 +37,9 @@ Simply go to the storage or application tab in your dev tools, go to adventofcod
 That's your key that you can use with ` aoc login <session>`.
 Super secret hint: if you add a space in front of a command in bash and most shells, it won't get added to your history so you can't accidentally reveal it later when doing a backwards history search.
 
+![image](https://user-images.githubusercontent.com/12631527/205678570-427c4ee7-5746-4e73-b48e-a775375eadfc.png)
+
+
 ### Available Commands:
 
 ```
