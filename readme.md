@@ -67,4 +67,4 @@ aoc -i <param> / aoc install <param>:
 
 Reach out on twitter @spreen_co
 
-https://github-readme-twitter.gazf.vercel.app/api?id=spreen_co
+[![github-readme-twitter](https://github-readme-twitter.gazf.vercel.app/api?id=spreen_co)](https://twitter.com/spreen_co)
