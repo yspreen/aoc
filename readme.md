@@ -65,6 +65,8 @@ aoc -i <param> / aoc install <param>:
 
 ## Feedback?
 
-Reach out on twitter @spreen_co
+Reach out on twitter [@spreen_co](https://twitter.com/spreen_co).
+
+I also do advent of code every day on [twitch](https://www.twitch.tv/at_spreen_co) and have all of my solutions here: [adventofcode](https://github.com/yspreen/adventofcode)
 
 [![github-readme-twitter](https://github-readme-twitter.gazf.vercel.app/api?id=spreen_co)](https://twitter.com/spreen_co)
