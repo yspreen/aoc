@@ -1,6 +1,8 @@
 # AOC CLI
 
-(using same commands as apexatoll/aoc-cli)
+(using same commands as apexatoll/aoc-cli.)
+
+Built during a [live stream](https://www.youtube.com/watch?v=rPo43HUyZ_c&list=PL8QzwnmPB7qbvjJiEG-NJq6b2E-MA4By4).
 
 ## Usage:
 
