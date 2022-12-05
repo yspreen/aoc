@@ -217,7 +217,7 @@ def submit(answer):
         print("Not correct.")
         log(answer, "wrong")
     else:
-        print("Correct!")
+        print("Correct! Part %d complete." % shared_config.part)
         log(answer, "correct")
         correct = True
 
