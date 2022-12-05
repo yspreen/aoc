@@ -377,17 +377,17 @@ def main():
 
     arg = sys.argv
     a_len = len(arg)
-    if a_len > 1 and arg[-2] == "-d":
+    if a_len > 1 and arg[-2] in ["-d", "day"]:
         return new_day_directory(arg[-1])
-    if a_len > 1 and arg[-2] == "-y":
+    if a_len > 1 and arg[-2] in ["-y", "year"]:
         return new_year_directory(arg[-1])
-    if a_len > 1 and arg[-2] == "-s":
+    if a_len > 1 and arg[-2] in ["-s", "solve"]:
         return submit(arg[-1])
-    if a_len > 1 and arg[-2] == "-k":
+    if a_len > 1 and arg[-2] in ["-k", "login"]:
         return store_key(arg[-1])
-    if a_len > 0 and arg[-2] == "-r":
+    if a_len > 0 and arg[-2] in ["-r", "refresh"]:
         return refresh()
-    if a_len > 0 and arg[-1] == "install":
+    if a_len > 0 and arg[-1] in ["-i", "install"]:
         return install()
 
     print("🐮")
