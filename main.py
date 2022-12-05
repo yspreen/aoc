@@ -204,31 +204,29 @@ def submit(answer):
     text = parse_answer_html(html)
     text.split("(")[0]
 
-    correct = True
+    correct = False
     if " too low " in text:
         print("Too low.")
         log(answer, "low")
-        correct = False
     elif " too high " in text:
         print("Too high.")
         log(answer, "low")
-        correct = False
     elif "left to wait" in text:
         print("Please wait %s." % get_wait_time(text))
-        correct = False
     elif "not the right answer" in text:
         print("Not correct.")
         log(answer, "wrong")
-        correct = False
     else:
         print("Correct!")
         log(answer, "correct")
+        correct = True
 
     if not correct or shared_config.part is None:
         return
 
     shared_config.part += 1
     write_meta_file()
+    refresh()
 
 
 def get_wait_time(text):
@@ -282,6 +280,12 @@ def download_puzzle(config_):
 
     pandoc(".puzzle.tmp.html", "%d.md" % config.day)
     clean_up_md("%d.md" % config.day)
+
+
+def refresh():
+    if not read_config():
+        return
+    download_puzzle(shared_config)
 
 
 def download_input(config_):
@@ -381,6 +385,8 @@ def main():
         return submit(arg[-1])
     if a_len > 1 and arg[-2] == "-k":
         return store_key(arg[-1])
+    if a_len > 0 and arg[-2] == "-r":
+        return refresh()
     if a_len > 0 and arg[-1] == "install":
         return install()
 
