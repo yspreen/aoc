@@ -1,6 +1,8 @@
 # AOC CLI
 
-(using same commands as apexatoll/aoc-cli)
+(using same commands as apexatoll/aoc-cli.)
+
+Built during a [live stream](https://www.youtube.com/watch?v=rPo43HUyZ_c&list=PL8QzwnmPB7qbvjJiEG-NJq6b2E-MA4By4).
 
 ## Usage:
 
@@ -37,6 +39,9 @@ Simply go to the storage or application tab in your dev tools, go to adventofcod
 That's your key that you can use with ` aoc login <session>`.
 Super secret hint: if you add a space in front of a command in bash and most shells, it won't get added to your history so you can't accidentally reveal it later when doing a backwards history search.
 
+![image](https://user-images.githubusercontent.com/12631527/205678570-427c4ee7-5746-4e73-b48e-a775375eadfc.png)
+
+
 ### Available Commands:
 
 ```
@@ -62,6 +67,8 @@ aoc -i <param> / aoc install <param>:
 
 ## Feedback?
 
-Reach out on twitter @spreen_co
+Reach out on twitter [@spreen_co](https://twitter.com/spreen_co).
 
-https://github-readme-twitter.gazf.vercel.app/api?id=spreen_co
+I also do advent of code every day on [twitch](https://www.twitch.tv/at_spreen_co) and have all of my solutions here: [adventofcode](https://github.com/yspreen/adventofcode)
+
+[![github-readme-twitter](https://github-readme-twitter.gazf.vercel.app/api?id=spreen_co)](https://twitter.com/spreen_co)
