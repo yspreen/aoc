@@ -124,7 +124,7 @@ def curl(endpoint, data="", cookie="", method="POST"):
         -H 'Cache-Control: no-cache' \
         -H 'Host: %s' \
         -H 'Origin: https://%s' \
-        -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15' \
+        -H 'User-Agent: https://github.com/yspreen/aoc' \
         -H 'Cookie: %s' \
         --data '%s'""" % (
         endpoint,
