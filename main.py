@@ -13,6 +13,7 @@ except:
 CONFIG_FILE = ".meta"
 SESSION_FILE = ".aoc.secret"
 LOG_FILE = ".answers.log"
+DEBUG_HTML_FILE = "debug-full-aoc-response.html"
 
 
 class Config:
@@ -205,10 +206,10 @@ def submit(answer):
     text.split("(")[0]
 
     correct = False
-    if " too low " in text:
+    if " too low. " in text:
         print("Too low.")
         log(answer, "low")
-    elif " too high " in text:
+    elif " too high. " in text:
         print("Too high.")
         log(answer, "low")
     elif "left to wait" in text:
@@ -216,10 +217,23 @@ def submit(answer):
     elif "not the right answer" in text:
         print("Not correct.")
         log(answer, "wrong")
-    else:
+    elif "right answer" in text:
         print("Correct! Part %d complete." % shared_config.part)
         log(answer, "correct")
         correct = True
+    else:
+        print(
+            "Whelp. AOC CLI could not parse this server response. Here's what I got:\n"
+        )
+        print(text)
+        print(
+            "\nMaybe you can help make aoc cli better and report this. I also put the full html response into a temporary file in this directory called %s"
+            % DEBUG_HTML_FILE
+        )
+        print("Might be helpful for debugging! Cheers 🎄")
+        with open(DEBUG_HTML_FILE, "w") as f:
+            f.write(html)
+        return
 
     if not correct or shared_config.part is None:
         return
@@ -385,7 +399,7 @@ def main():
         return submit(arg[-1])
     if a_len > 1 and arg[-2] in ["-k", "login"]:
         return store_key(arg[-1])
-    if a_len > 0 and arg[-2] in ["-r", "refresh"]:
+    if a_len > 0 and arg[-1] in ["-r", "refresh"]:
         return refresh()
     if a_len > 0 and arg[-1] in ["-i", "install"]:
         return install()
