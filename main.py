@@ -222,20 +222,21 @@ def submit(answer):
     text.split("(")[0]
 
     correct = False
+    log_answer = lambda result: log(answer, result)
     if " too low. " in text:
         print("Too low.")
-        log(answer + " (part %d):" % shared_config.part, "low")
+        log_answer("low")
     elif " too high. " in text:
         print("Too high.")
-        log(answer + " (part %d):" % shared_config.part, "high")
+        log_answer("high")
     elif "left to wait" in text:
         print("Please wait %s." % get_wait_time(text))
     elif "not the right answer" in text:
         print("Not correct.")
-        log(answer + " (part %d):" % shared_config.part, "wrong")
+        log_answer("wrong")
     elif "right answer" in text:
         print("Correct! Part %d complete." % shared_config.part)
-        log(answer + " (part %d):" % shared_config.part, "correct")
+        log_answer("correct")
         correct = True
     else:
         print(
