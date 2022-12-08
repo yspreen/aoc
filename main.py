@@ -181,12 +181,28 @@ def day_directory():
 
 
 def submit(answer):
+    if answer == "":
+        return
+
     if not read_config():
         return
 
     if not day_directory():
         print("This is not an AOC day directory.")
         return
+
+    try:
+        with open(LOG_FILE, "r") as f:
+            text = f.read()
+        for line in text.splitlines():
+            if line.split("] ", 1)[1].startswith(answer + ":"):
+                return print("We already gave this answer.")
+            if line.split("] ", 1)[1].startswith(
+                answer + " (part %d):" % shared_config.part
+            ):
+                return print("We already gave this answer.")
+    except Exception:
+        pass
 
     part = 0 if shared_config.part is None else shared_config.part
 
@@ -208,18 +224,18 @@ def submit(answer):
     correct = False
     if " too low. " in text:
         print("Too low.")
-        log(answer, "low")
+        log(answer + " (part %d):" % shared_config.part, "low")
     elif " too high. " in text:
         print("Too high.")
-        log(answer, "low")
+        log(answer + " (part %d):" % shared_config.part, "high")
     elif "left to wait" in text:
         print("Please wait %s." % get_wait_time(text))
     elif "not the right answer" in text:
         print("Not correct.")
-        log(answer, "wrong")
+        log(answer + " (part %d):" % shared_config.part, "wrong")
     elif "right answer" in text:
         print("Correct! Part %d complete." % shared_config.part)
-        log(answer, "correct")
+        log(answer + " (part %d):" % shared_config.part, "correct")
         correct = True
     else:
         print(
