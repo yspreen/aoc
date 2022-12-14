@@ -348,6 +348,7 @@ def new_day_directory(day_string):
         config.cookie = shared_config.cookie
         write_meta_file(config)
         download_puzzle(config)
+        log_line("downloaded")
     except Exception as e:
         print("Failed to create day directory:", e)
     os.chdir("..")
