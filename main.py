@@ -422,8 +422,32 @@ def main():
     if a_len > 0 and arg[-1] in ["-i", "install"]:
         return install()
 
-    print("🐮")
+    print_help()
 
+def print_help():
+    print("Usage: aoc [command] [options]")
+    print()
+    print("Commands:")
+    print("aoc -d <day> / aoc day <day>: ")
+    print("  Will create a new folder to solve the day numbered <day>. ")
+    print()
+    print("aoc -y <year> / aoc year <year>: ")
+    print("  Will set up the current folder to contain puzzles for year <day>. ")
+    print()
+    print("aoc -s <answer> / aoc solve <answer>: ")
+    print("  Will attempt to solve the current puzzle with answer <answer>. ")
+    print()
+    print("aoc -k <param> / aoc login <param>: ")
+    print("  Will use your auth cookie to sign you in. Credentials stored (and git ignored automatically) in the current directory. ")
+    print()
+    print("aoc -r <param> / aoc refresh <param>: ")
+    print("  Will reload the puzzle markdown and input. ")
+    print()
+    print("aoc -i <param> / aoc install <param>: ")
+    print("  Will install this script in /usr/local/bin. ")
+    print("  (requires sudo.) ")
+    print()
+    print("For more information, visit https://github.com/yspreen/aoc")
 
 if __name__ == "__main__":
     main()
