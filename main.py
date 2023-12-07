@@ -4,6 +4,7 @@ import stat
 import sys
 import re
 from datetime import datetime
+from time import sleep
 
 try:
     from typing import Optional
@@ -179,6 +180,28 @@ def log(answer, result):
 def day_directory():
     return shared_config.directory_type == "DAY"
 
+def format_seconds(seconds):
+    if seconds < 60:
+        return f"{seconds}s"
+    if seconds < 60 * 60:
+        return f"{seconds // 60}m {seconds % 60}s"
+    return f"{seconds // 60 // 60}h {(seconds // 60) % 60}m {seconds % 60}s"
+
+def wait(wait_text, answer):
+    seconds = 0
+    for part in wait_text.split(" "):
+        if part.endswith("s"):
+            seconds += int(part[:-1])
+        if part.endswith("m"):
+            seconds += int(part[:-1]) * 60
+        if part.endswith("h"):
+            seconds += int(part[:-1]) * 60
+    while seconds >= 0:
+        print(f"\rWaiting {format_seconds(seconds)} before retry... (ctrl+c to stop) ", end='')
+        sleep(1)
+        seconds -= 1
+    print()
+    submit(answer)
 
 def submit(answer):
     if answer == "":
@@ -230,7 +253,7 @@ def submit(answer):
         print("Too high.")
         log_answer("high")
     elif "left to wait" in text:
-        print("Please wait %s." % get_wait_time(text))
+        return wait(get_wait_time(text), answer)
     elif "not the right answer" in text:
         print("Not correct.")
         log_answer("wrong")
@@ -317,6 +340,7 @@ def refresh():
     if not read_config():
         return
     download_puzzle(shared_config)
+    download_input(shared_config)
 
 
 def download_input(config_):
